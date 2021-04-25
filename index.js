@@ -20,17 +20,29 @@ $(document).ready(function () {
         $(".heading:nth-child(" + sel + ")").append($('<div class="subheading"><h2>' + inp2 + '</h2></div>'));
 
         var newOption2 = $('<option value="' + selval + '">' + inp2 + '</option>');
-        $('.selectsub').append(newOption2);
+        $('.selectsub').append(newOption2, function () {
+            $(".selectheading").change(function () {
+                if ($(this).data('options') === undefined) {
+                    /*Taking an array of all options-2 and kind of embedding it on the select1*/
+                    $(this).data('options', $('.selectsub option').clone());
+                }
+                var cls = $(this).val();
+                var options = $(this).data('options').filter('[value=' + cls + ']');
+                $('.selectsub').html(options);
+            });
+        });
 
-        var $select1 = $('.selectheading').val(),
-            $select2 = $('.selectsub').val(),
-            $options = $select2.find('option');
 
-        $select1.change(function () {
-            // console.log('change');
-            $select2.html($options.filter('[value="' + selval + '"]'));
 
-        }).trigger('change');
+        // var $select1 = $('.selectheading').val(),
+        //     $select2 = $('.selectsub').val(),
+        //     $options = $select2.find('option');
+
+        // $select1.change(function () {
+        //     // console.log('change');
+        //     $select2.html($options.filter('[value="' + selval + '"]'));
+
+        // }).trigger('change');
 
         // $(".selectsub").children('option:gt(0)').hide();
         // $(".selectheading").change(function () {
