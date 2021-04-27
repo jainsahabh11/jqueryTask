@@ -11,7 +11,7 @@ $(document).ready(function () {
         $("main div h1").each(function (index, val) {
             index = index + 1;
             var aaa = $(this).text();
-            console.log(index, val);
+            // console.log(index, val);
             $('.selectheading').append('<option value="' + index + '">' + aaa + '</option>');
 
 
@@ -20,46 +20,38 @@ $(document).ready(function () {
 
     });
 
+
     $(".btnsubmit2").click(function () {
         var inp2 = $(".sub_name").val();
         var selval = $(".selectheading").val();
-        $("main div:nth-child(" + selval + ") h1").append($('<div><h2>' + inp2 + '</h2></div>'));
-        $(".selectsub option").remove();
-        $(".selectheading").append(' <option value="none" selected disabled hidden>--select--</option>');
-        $("main div h1 div h2").each(function (index, val) {
+        console.log(selval, inp2);
+        $("main div:nth-child(" + selval + ")").append('<h2>' + inp2 + '</h2>');
+
+        // $(".selectsub option").remove();
+        // $(".selectheading").append(' <option value="none" selected disabled hidden>--select--</option>');
+        // $("main div h1 div h2").each(function (index, val) {
+        //     index = index + 1;
+        //     var aaa = $(this).text();
+        //     console.log(index, val);
+        //     $('.selectsub').append('<option value="' + index + '">' + aaa + '</option>');
+        // });
+
+
+    });
+    $(".selectheading").change(function () {
+        var selval = $('.selectheading option').val();
+        var inp2 = $(".sub_name").val();
+
+        $('.selectsub  option').remove();
+        $("main div h1:nth-child(" + selval + ")").each(function (index) {
+
             index = index + 1;
-            var aaa = $(this).text();
-            console.log(index, val);
-            $('.selectsub').append('<option value="' + index + '">' + aaa + '</option>');
-        });
+            $('.selectsub').append('<option value="' + selval + '">' + inp2 + '</option>');
+
+        })
+    })
 
 
-
-
-        // var sel = $(".selectheading")[1].selectedIndex;
-        // var headingVal = $(".selectheading")[1].value;
-        // console.log("hello", headingVal, sel);
-
-        // $(".heading:nth-child(" + sel + ")").append($('<div class="subheading"><h2>' + inp2 + '</h2></div>'));
-
-        // var newOption2 = $('<option value="' + headingVal + '">' + inp2 + '</option>');
-        // $('.selectsub').append(newOption2);
-    });
-
-    $(".selectheadingform").change(function () {
-        // if ($(this).data('options') === undefined) {
-        //     /*Taking an array of all options-2 and kind of embedding it on the select1*/
-        //     $(this).data('options', $('.selectsub option').clone());
-        // }
-        var id = $(this).val();
-        $('.selectsub option[value!=' + id + ']').remove();
-        $(this).data('options', $('.selectsub option')).each(function () {
-            var options = $(this).data('options').filter('[value=' + id + ']');
-            $('.selectsub').html(options);
-        });
-
-
-    });
     $(".btnsubmit3").click(function () {
 
         var lab = $(".lab").val();
