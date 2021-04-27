@@ -8,11 +8,21 @@ $(document).ready(function () {
 
         $(".selectheading option").remove();
         $(".selectheading").append(' <option value="none" selected disabled hidden>--select--</option>');
-        $("main div h1").each(function (index, val) {
+        $("main div h1").each(function (index) {
             index = index + 1;
             var aaa = $(this).text();
             // console.log(index, val);
             $('.selectheading').append('<option value="' + index + '">' + aaa + '</option>');
+
+
+        });
+        $(".selectheadingform option").remove();
+        $(".selectheadingform").append(' <option value="none" selected disabled hidden>--select--</option>');
+        $("main div h1").each(function (index) {
+            index = index + 1;
+            var aaa = $(this).text();
+            // console.log(index, val);
+            $('.selectheadingform').append('<option value="' + index + '">' + aaa + '</option>');
 
 
         });
@@ -24,32 +34,26 @@ $(document).ready(function () {
     $(".btnsubmit2").click(function () {
         var inp2 = $(".sub_name").val();
         var selval = $(".selectheading").val();
-        console.log(selval, inp2);
-        $("main div:nth-child(" + selval + ")").append('<h2>' + inp2 + '</h2>');
-
-        // $(".selectsub option").remove();
-        // $(".selectheading").append(' <option value="none" selected disabled hidden>--select--</option>');
-        // $("main div h1 div h2").each(function (index, val) {
-        //     index = index + 1;
-        //     var aaa = $(this).text();
-        //     console.log(index, val);
-        //     $('.selectsub').append('<option value="' + index + '">' + aaa + '</option>');
-        // });
+        // console.log(selval, inp2);
+        $("main div:nth-child(" + selval + ")").append('<section><h2>' + inp2 + '</h2></section>');
 
 
     });
-    $(".selectheading").change(function () {
-        var selval = $('.selectheading option').val();
-        var inp2 = $(".sub_name").val();
+    $(".selectheadingform").change(function () {
+        var selval = $(this).val();
 
-        $('.selectsub  option').remove();
-        $("main div h1:nth-child(" + selval + ")").each(function (index) {
+        $('.selectsubform option').remove();
+        $(".selectsubform").append(' <option value="none" selected disabled hidden>--select--</option>');
+        $("main div:nth-child(" + selval + ") section h2").each(function (index) {
+            var inp3 = $(this).text();
+            console.log(inp3, '22222222');
 
-            index = index + 1;
-            $('.selectsub').append('<option value="' + selval + '">' + inp2 + '</option>');
+            // index = index + 1;
+            $('.selectsubform').append('<option value="' + index + '">' + inp3 + '</option>');
 
-        })
-    })
+        });
+
+    });
 
 
     $(".btnsubmit3").click(function () {
