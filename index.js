@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    // var index = 0;
     $(".btnsubmit").click(function () {
         var inp = $(".heading_name").val();
 
@@ -10,9 +9,9 @@ $(document).ready(function () {
         $(".selectheading").append(' <option value="none" selected disabled hidden>--select--</option>');
         $("main div h1").each(function (index) {
             index = index + 1;
-            var aaa = $(this).text();
-            // console.log(index, val);
-            $('.selectheading').append('<option value="' + index + '">' + aaa + '</option>');
+            var head1 = $(this).text();
+
+            $('.selectheading').append('<option value="' + index + '">' + head1 + '</option>');
 
 
         });
@@ -20,9 +19,9 @@ $(document).ready(function () {
         $(".selectheadingform").append(' <option value="none" selected disabled hidden>--select--</option>');
         $("main div h1").each(function (index) {
             index = index + 1;
-            var aaa = $(this).text();
-            // console.log(index, val);
-            $('.selectheadingform').append('<option value="' + index + '">' + aaa + '</option>');
+            var headform1 = $(this).text();
+
+            $('.selectheadingform').append('<option value="' + index + '">' + headform1 + '</option>');
 
 
         });
@@ -44,11 +43,10 @@ $(document).ready(function () {
 
         $('.selectsubform option').remove();
         $(".selectsubform").append(' <option value="none" selected disabled hidden>--select--</option>');
-        $("main div:nth-child(" + selval + ") section h2").each(function (index) {
+        $("main div:nth-child(" + selval + ") section").each(function (index) {
+            index = index + 1;
             var inp3 = $(this).text();
-            console.log(inp3, '22222222');
 
-            // index = index + 1;
             $('.selectsubform').append('<option value="' + index + '">' + inp3 + '</option>');
 
         });
@@ -57,14 +55,22 @@ $(document).ready(function () {
 
 
     $(".btnsubmit3").click(function () {
-
-        var lab = $(".lab").val();
+        var label = $(".lab").val();
         var name = $(".name").val();
-        var ph = $(".ph").val();
+        var placeholder = $(".ph").val();
         var cls = $(".cls").val();
-        var val = $(".val").val();
-        var opt = $(".opt").val();
-        console.log(lab);
+        var value = $(".val").val();
+        var option = $(".opt").val();
+        // console.log(label, name, placeholder, cls, value, option);
+
+        var headval = $(".selectheadingform").val();
+        var subval = $(".selectsubform").val();
+        console.log(headval, subval);
+        // $("main div h1 section:nth-child(" + subval + ")").append(' <label for="emails">Enter email addresses:</label>');
+        $("main div:nth-child(" + headval + ") section:nth-child(" + subval + ")").append('<label for="name">' + label + '</label>');
+
+
+
 
 
     });
