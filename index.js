@@ -42,6 +42,7 @@ $(document).ready(function () {
 
         $('.myform2')[0].reset();
     });
+
     $(".selectheadingform").change(function () {
         var selval1 = $(this).val();
 
@@ -75,30 +76,29 @@ $(document).ready(function () {
 
         var fs = $('.formstatic').val();
         var arr = $(".opt").val().split(",");
-
+        var aa = '<p></p>';
 
         if (fs == 'radio') {
             $.each(arr, function (i) {
 
-                $(fos).append('<p><input type="' + fs + '"  name="' + name + '" value="' + value + '""class="' + cls + '"> <label>' + arr[i] + ' </label></p>'
-                );
+                $(fos).append('<input type="' + fs + '"  name="' + name + '" value="' + value + '""class="' + cls + '"> <label>' + arr[i] + ' </label>');
             });
-
+            // $(ra).appendTo(aa);
 
         }
 
         else if (fs == 'textarea') {
             $.each(arr, function (j) {
 
-                $(fos).append('<p><input type="' + fs + '"  name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[j] + ' </label></p>'
-                );
+                $(fos).append('<input type="' + fs + '"  name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[j] + ' </label>').appendTo(aa);
             });
 
 
 
         } else if (fs == 'select') {
-            var selc = '<p><select class="' + cls + '"></select></p>'
-            console.log(selc, '1111111111')
+
+            var selc = $('<select name="' + name + '" class="' + cls + '"></select>').appendTo(aa);
+
             $.each(arr, function (k) {
                 $('<option value="' + value + '">' + arr[k] + '</option>').appendTo(selc);
             });
@@ -108,13 +108,13 @@ $(document).ready(function () {
         else if (fs == 'checkbox') {
             $.each(arr, function (l) {
 
-                $(fos).append('<p><input type="' + fs + '"  name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[l] + ' </label></p>'
-                );
+                var ch = $(fos).append('<input type="' + fs + '"  name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[l] + ' </label>');
             });
+            $(ch).appendTo(aa);
 
         }
         else {
-            $(fos).append('<p><label >' + label + '</label><input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '"></p>');
+            $(fos).append('<p><label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '"></p>');
 
         }
 
