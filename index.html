@@ -69,7 +69,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-primary btnsubmit">Submit</button>
+                        <button type="submit" class="btn btn-primary btnsubmit" data-bs-dismiss="modal">Submit</button>
                     </div>
                 </form>
             </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-primary btnsubmit2">Submit</button>
+                        <button type="submit" class="btn btn-primary btnsubmit2" data-bs-dismiss="modal">Submit</button>
                     </div>
                 </form>
             </div>
@@ -130,50 +130,50 @@
                             </select>
 
                             <h6 class="selinp">Select input Here</h6>
-                            <select class="form-select formstatic" aria-label="Default select example">
-                                <option value="select1">-----------select-------------</option>
-                                <option value="email">email</option>
-                                <option value="number">number</option>
-                                <option value="text">text</option>
-                                <option value="button">button</option>
-                                <option value="checkbox">checkBox</option>
-                                <option value="file">file</option>
-                                <option value="radio">radio</option>
-                                <option value="textarea">textarea</option>
-                                <option value="select">select</option>
+                            <div>
+                                <select class="form-select formstatic" aria-label="Default select example">
+                                    <option value="select1">-----------select-------------</option>
+                                    <option value="email">email</option>
+                                    <option value="number">number</option>
+                                    <option value="text">text</option>
+                                    <option value="button">button</option>
+                                    <option value="checkbox">checkBox</option>
+                                    <option value="file">file</option>
+                                    <option value="radio">radio</option>
+                                    <option value="textarea">textarea</option>
+                                    <option value="select">select</option>
 
-                            </select>
-                            <h6 class="inputarea">Input</h6>
-                            <input type="text" name="label" class="form-control lab" placeholder="label">
-                            <input type="text" name="name" class="form-control name" placeholder="name">
-                            <input type="text" name="placeholder" class="form-control ph" placeholder="placeholder">
-                            <input type="text" name="class" class="form-control cls" placeholder="class">
-                            <input type="text" name="value" class="form-control val" placeholder="value">
-                            <input type="text" name="option" class="form-control opt" placeholder="option">
+                                </select>
+                            </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Disable
-                                </label>
+                            <div>
+                                <h6 class="inputarea">Input</h6>
+
+                                <input type="text" name="label" class="form-control ins lab" placeholder="label">
+                                <input type="text" name="name" class="form-control ins name" placeholder="name">
+                                <input type="text" name="placeholder" class="form-control ins ph"
+                                    placeholder="placeholder">
+                                <input type="text" name="class" class="form-control ins cls" placeholder="class">
+                                <input type="text" name="value" class="form-control ins val" placeholder="value">
+                                <input type="text" name="option" class="form-control ins opt" placeholder="option">
+
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Readonly
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Readonly
-                                </label>
+                            <div>
+
+                                <input name="disable" class="dis" type="checkbox" value="disable" id="checkbox1">
+                                <label for="checkbox1">Disable</label><br>
+
+                                <input name="required" class="req" type="checkbox" value="required" id="checkbox2">
+                                <label for="checkbox2">Required</label><br>
+                                <input name="readonly" class="read" type="checkbox" value="readonly" id="checkbox2">
+                                <label for="checkbox2">Readonly</label><br>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-primary btnsubmit3">Save changes</button>
+                        <button type="submit" class="btn btn-primary btnsubmit3" data-bs-dismiss="modal">Save
+                            changes</button>
                     </div>
                 </form>
             </div>
