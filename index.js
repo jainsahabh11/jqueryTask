@@ -12,7 +12,7 @@ $(document).ready(function () {
         e.preventDefault();
         var inp = $(".heading_name").val();     //get the input values
 
-        $("main").append($('<div id="div1" ondrop="drop(event)" ondragover="allowdrop(event)"><h1> ' + inp + '<button type="button" class="btn-close"onclick="deleteFromStorage()  aria-label="Close"></button></h1></div>'));        //append the input value in main div h1
+        $("main").append($('<div id="div1" ><h1> ' + inp + '<button type="button" class="btn-close"onclick="deleteFromStorage(this)" aria-label="Close"></button></h1></div>'));        //append the input value in main div h1
 
         $(".selectheading option").remove();
         $(".selectheading").append(' <option value="none" selected disabled hidden>--select--</option>');
@@ -53,7 +53,7 @@ $(document).ready(function () {
         var inp2 = $(".sub_name").val();            //get the sub heading input values
         var selval = $(".selectheading").val();     //get the indeX value of heading
 
-        $("main div:nth-child(" + selval + ")").append('<section draggable="true" ondragstart="drag(event)"><h2>' + inp2 + '<button type="button" class="btn-close" onclick="deleteFromStorage() aria-label="Close"></button></h2></section>');  //main div nthchild(heading selected are append after selected heading)
+        $("main div:nth-child(" + selval + ")").append('<section><h2>' + inp2 + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');  //main div nthchild(heading selected are append after selected heading)
 
 
         selval = selval - 1;
@@ -111,9 +111,9 @@ $(document).ready(function () {
         if (fs == 'radio') {
             // $(aa).appendTo(fos);
             $.each(arr, function (i) {
-                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '""class="' + cls + '"> <label>' + arr[i] + ' </label>');
+                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '""class="' + cls + '"> <label>' + arr[i] + ' </label><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
                 if (arr[i] == value) {
-                    $("input[value=" + value + "]").prop('checked', true);
+                    $('input[name=type][value=' + value + ']').prop('checked', true);
                 }
             });
 
@@ -123,7 +123,7 @@ $(document).ready(function () {
             // $(aa).appendTo(fos);
             $.each(arr, function (j) {
                 $(fos).append('<input type="' + fs + '"name="' + name + '"value="' + value + '"class="' + cls + '"> <label>' +
-                    arr[j] + ' </label>');
+                    arr[j] + ' </label><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
             });
 
 
@@ -142,13 +142,13 @@ $(document).ready(function () {
             // $(aa).appendTo(fos);
             $.each(arr, function (l) {
 
-                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[l] + ' </label>');
+                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[l] + ' </label><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
             });
 
 
         }
         else {
-            $(fos).append('<label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '">');
+            $(fos).append('<label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '"><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
 
         }
 
@@ -160,21 +160,6 @@ $(document).ready(function () {
 
         var myJSON = JSON.stringify(headarr);
         window.localStorage.setItem("headings", myJSON);
-
-
-        // function allowDrop(ev) {
-        //     ev.preventDefault();
-        // }
-        // function drag(ev) {
-        //     ev.dataTransfer.setData("text", ev.target.id);
-        // }
-        // function drop(ev) {
-        //     ev.preventDefault();
-        //     var data = ev.dataTransfer.getData("text");
-        //     ev.target.appendChild(document.getElementById(data));
-        // }
-
-
 
         // Retrieving data:
         // var text = localStorage.getItem("headings");
@@ -215,35 +200,20 @@ $(document).ready(function () {
         }
     });
 
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
 
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.class);
-    }
-
-
-    function drop(ev) {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));
-    }
-
-    // $(".main div h1:first, .main div h1 section h2").draggable();
 
 
 });
 
-function loadDataFromStorage() {
+function loadDataFromStorage(el) {
 
-    headarr = JSON.parse(window.localStorage.getItem("headings"));
+    headarr = JSON.parse(window.localStorage.getItem("headings")) || [];
 
     $(headarr).each(function (index, headObj) {
 
         // console.log(headObj.heading);
 
-        $('main').append('<div><h1> ' + headObj.heading + '<button type="button" class="btn-close" onclick="deleteFromStorage() aria-label="Close"></button></h1></div>');
+        $('main').append('<div><h1> ' + headObj.heading + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h1></div>');
 
         // console.log(index);
         var subArr = headObj.sub_arr;
@@ -251,12 +221,12 @@ function loadDataFromStorage() {
         index = index + 1;
         $(subArr).each(function (i, subObj) {
             // console.log(subObj.subheading);
-            $('main div:nth-child(' + index + ')').append('<section><h2>' + subObj.subheading + '<button type="button" class="btn-close" onclick="deleteFromStorage() aria-label="Close"></button></h2></section>');
+            $('main div:nth-child(' + index + ')').append('<section><h2>' + subObj.subheading + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');
             var formArr = subObj.formarr;
             i = i + 1;
             $(formArr).each(function (j, formObj) {
                 // console.log(formObj.label, formObj.name, formObj.placeholder, formObj.classs);
-                $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").append('<label >' + formObj.label + '</label>  <input type="' + formObj.type + '" name="' + formObj.name + '" placeholder="' + formObj.placeholder + '" value="' + formObj.value + '"class="' + formObj.classs + '"option="' + formObj.option + '">');
+                $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").append('<label >' + formObj.label + '</label>  <input type="' + formObj.type + '" name="' + formObj.name + '" placeholder="' + formObj.placeholder + '" value="' + formObj.value + '"class="' + formObj.classs + '"option="' + formObj.option + '"><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
             });
         });
 
@@ -265,27 +235,38 @@ function loadDataFromStorage() {
 
 };
 
-function deleteFromStorage() {
-    // var headarr = [];
-    JSON.parse(window.localStorage.clear());
+function deleteFromStorage(el) {
+    headarr = [];
+    window.localStorage.clear();
+    // el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
+    el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
 
     $("main div h1").each(function (index) {
         // index = index + 1;
         var head1 = $(this).text();
         console.log(head1);
-        $(this).parent('div').remove();
+        // $(this).parent('div').remove();
 
         headarr.push({ 'heading': head1, 'sub_arr': [] })
         $("main div:nth-child(" + index + ") section h2").each(function (i) {
-            // index = index + 1;
+            // index = index - 1;
             var inp2 = $(this).text();
 
-
-
             headarr[index].sub_arr.push({ "subheading": inp2, 'formarr': [] });
+
+            $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").each(function () {
+                var inp3 = $(this).text();
+                console.log(inp3);
+                // index = index - 1;
+                // i = i - 1;
+                headarr[index].sub_arr[i].formarr.push({ 'label': label, 'name': name, 'placeholder': placeholder, 'classs': cls, 'value': value, 'option': arr, 'type': fs });
+            });
         });
+
 
     });  //reset  the  form
 }
+
+
 
 
