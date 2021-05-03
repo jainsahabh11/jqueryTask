@@ -111,7 +111,7 @@ $(document).ready(function () {
         if (fs == 'radio') {
             // $(aa).appendTo(fos);
             $.each(arr, function (i) {
-                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '""class="' + cls + '"> <label>' + arr[i] + ' </label><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
+                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '""class="' + cls + '"> <label>' + arr[i] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
                 if (arr[i] == value) {
                     $('input[name=type][value=' + value + ']').prop('checked', true);
                 }
@@ -123,7 +123,7 @@ $(document).ready(function () {
             // $(aa).appendTo(fos);
             $.each(arr, function (j) {
                 $(fos).append('<input type="' + fs + '"name="' + name + '"value="' + value + '"class="' + cls + '"> <label>' +
-                    arr[j] + ' </label><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
+                    arr[j] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
             });
 
 
@@ -142,13 +142,13 @@ $(document).ready(function () {
             // $(aa).appendTo(fos);
             $.each(arr, function (l) {
 
-                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[l] + ' </label><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
+                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + value + '"class="' + cls + '"> <label>' + arr[l] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
             });
 
 
         }
         else {
-            $(fos).append('<label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '"><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
+            $(fos).append('<p><label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '"><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button></p>');
 
         }
 
@@ -226,7 +226,7 @@ function loadDataFromStorage(el) {
             i = i + 1;
             $(formArr).each(function (j, formObj) {
                 // console.log(formObj.label, formObj.name, formObj.placeholder, formObj.classs);
-                $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").append('<label >' + formObj.label + '</label>  <input type="' + formObj.type + '" name="' + formObj.name + '" placeholder="' + formObj.placeholder + '" value="' + formObj.value + '"class="' + formObj.classs + '"option="' + formObj.option + '"><button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button>');
+                $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").append('<p><label >' + formObj.label + '</label>  <input type="' + formObj.type + '" name="' + formObj.name + '" placeholder="' + formObj.placeholder + '" value="' + formObj.value + '"class="' + formObj.classs + '"option="' + formObj.option + '"><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button></p>');
             });
         });
 
@@ -254,18 +254,18 @@ function deleteFromStorage(el) {
 
             headarr[index].sub_arr.push({ "subheading": inp2, 'formarr': [] });
 
-            $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").each(function () {
-                var inp3 = $(this).text();
-                console.log(inp3);
-                // index = index - 1;
-                // i = i - 1;
-                headarr[index].sub_arr[i].formarr.push({ 'label': label, 'name': name, 'placeholder': placeholder, 'classs': cls, 'value': value, 'option': arr, 'type': fs });
-            });
+
         });
 
 
     });  //reset  the  form
 }
+function deleteForFrom(elm) {
+
+    elm.parentNode.parentNode.removeChild(elm.parentNode);
+
+}
+
 
 
 
