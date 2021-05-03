@@ -47,6 +47,15 @@ $(document).ready(function () {
 
         $("main div:nth-child(" + selval + ")").append('<section><h2>' + inp2 + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');  //main div nthchild(heading selected are append after selected heading)
 
+        $(function () {
+
+            $("main div section").sortable({
+                connectWith: "main div, main div section",
+                dropOnEmpty: true
+            });
+
+
+        })
         selval = selval - 1;
 
         headarr[selval].sub_arr.push({ "subheading": inp2, 'formarr': [] });
@@ -182,6 +191,15 @@ function loadDataFromStorage() {
         $(".selectheadingform").append(' <option value="none" selected disabled hidden>--select--</option>');
         $('.selectheadingform').append('<option value="' + index + '">' + headObj.heading + '</option>');
 
+        $(function () {
+
+            $("main div section").sortable({
+                connectWith: "main div, main div section",
+                dropOnEmpty: true
+            });
+
+
+        })
         var subArr = headObj.sub_arr;
         $(subArr).each(function (i, subObj) {
             $('main div:nth-child(' + index + ')').append('<section><h2>' + subObj.subheading + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');
@@ -189,6 +207,8 @@ function loadDataFromStorage() {
 
             $(".selectsubform").append(' <option value="none" selected disabled hidden>--select--</option>');
             $('.selectsubform').append('<option value="' + i + '">' + subObj.subheading + '</option>');
+
+
 
             var formArr = subObj.formarr;
             $(formArr).each(function (j, formObj) {
@@ -251,6 +271,7 @@ function deleteFromStorage(el) {
 
         $("main div:nth-child(" + index + ") section h2").each(function (i) {
             var inp2 = $(this).text();
+
             headarr[index].sub_arr.push({ "subheading": inp2, 'formarr': [] });
 
             $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").each(function (j) {
@@ -270,15 +291,15 @@ function deleteForFrom(elm) {
     elm.parentNode.parentNode.removeChild(elm.parentNode);
 
 }
-$(function () {
+// $(function () {
 
-    $("main div section").sortable({
-        connectWith: "main div, main div section",
-        dropOnEmpty: true
-    });
+//     $("main div section").sortable({
+//         connectWith: "main div, main div section",
+//         dropOnEmpty: true
+//     });
 
 
-})
+// })
 
 
 
