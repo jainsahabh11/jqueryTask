@@ -47,15 +47,15 @@ $(document).ready(function () {
 
         $("main div:nth-child(" + selval + ")").append('<section><h2>' + inp2 + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');  //main div nthchild(heading selected are append after selected heading)
 
-        $(function () {
+        // $(function () {
 
-            $("main div section").sortable({
-                connectWith: "main div, main div section",
-                dropOnEmpty: true
-            });
+        //     $("main div section").sortable({
+        //         connectWith: "main div, main div section",
+        //         dropOnEmpty: true
+        //     });
 
 
-        })
+        // })
         selval = selval - 1;
 
         headarr[selval].sub_arr.push({ "subheading": inp2, 'formarr': [] });
@@ -191,15 +191,15 @@ function loadDataFromStorage() {
         $(".selectheadingform").append(' <option value="none" selected disabled hidden>--select--</option>');
         $('.selectheadingform').append('<option value="' + index + '">' + headObj.heading + '</option>');
 
-        $(function () {
+        // $(function () {
 
-            $("main div section").sortable({
-                connectWith: "main div, main div section",
-                dropOnEmpty: true
-            });
+        //     $("main div section").sortable({
+        //         connectWith: "main div, main div section",
+        //         dropOnEmpty: true
+        //     });
 
 
-        })
+        // })
         var subArr = headObj.sub_arr;
         $(subArr).each(function (i, subObj) {
             $('main div:nth-child(' + index + ')').append('<section><h2>' + subObj.subheading + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');
@@ -261,46 +261,63 @@ function loadDataFromStorage() {
 //delete data from local storage..........................//
 
 function deleteFromStorage(el) {
-    headarr = [];
+
     window.localStorage.clear();
     el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
-
-    $("main div h1").each(function (index) {
-        var head1 = $(this).text();
-        headarr.push({ 'heading': head1, 'sub_arr': [] });
-
-        $("main div:nth-child(" + index + ") section h2").each(function (i) {
-            var inp2 = $(this).text();
-
-            headarr[index].sub_arr.push({ "subheading": inp2, 'formarr': [] });
-
-            $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").each(function (j) {
-                deleteForFrom(this);
-                var inp3 = $(this).text();
-
-                headarr[index].sub_arr[i].formarr.push({ 'label': label, 'name': name, 'placeholder': placeholder, 'classs': cls, 'value': value, 'option': arr, 'type': fs });
-            });
-
-        });
-
-    });  //reset  the  form
+    prepareLocalStorageData();
 }
-
 function deleteForFrom(elm) {
 
     elm.parentNode.parentNode.removeChild(elm.parentNode);
+    window.localStorage.clear();
+    prepareLocalStorageData();
 
 }
-// $(function () {
 
-//     $("main div section").sortable({
-//         connectWith: "main div, main div section",
-//         dropOnEmpty: true
-//     });
+function prepareLocalStorageData() {
+    headarr = [];
+    $("main div h1").each(function (index) {
+        var head1 = $(this).text();
+        headarr.push({ 'heading': head1, 'sub_arr': [] });
+        var myJSON = JSON.stringify(headarr);
+        window.localStorage.setItem("headings", myJSON);
+
+        $("main div:nth-child(" + index + ") section h2").each(function (i) {
+            var inp2 = $(this).text();
+            index = index - 1;
+
+            headarr[index].sub_arr.push({ "subheading": inp2, 'formarr': [] });
+            var myJSON = JSON.stringify(headarr);
+            window.localStorage.setItem("headings", myJSON);
 
 
-// })
+            $("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")").each(function (j) {
 
+                var inp3 = $(this).text();
+                i = i - 1;
+                headarr[index].sub_arr[i].formarr.push({ 'label': label, 'name': name, 'placeholder': placeholder, 'classs': cls, 'value': value, 'option': arr, 'type': fs });
+                var myJSON = JSON.stringify(headarr);
+                window.localStorage.setItem("headings", myJSON);
+            });
+
+        });
+    });
+}
+
+
+$(function () {
+
+
+    $("main div section").sortable({
+        connectWith: "main div, main div section",
+        dropOnEmpty: true,
+        change: function (e) {
+            prepareLocalStorageData();
+        }
+    });
+
+
+})
 
 
 
