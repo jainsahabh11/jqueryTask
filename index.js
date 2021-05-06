@@ -93,16 +93,17 @@ $(document).ready(function () {
         var headval = $(".selectheadingform").val();
         var subval = $(".selectsubform").val();
 
-        var aa = '<p></p>';
+        var aa = '<p><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button></p>';
 
         var fos = $(aa).appendTo("main div:nth-child(" + headval + ") section:nth-of-type(" + subval + ")");
+
 
         var fs = $('.formstatic').val();
         var arr = $(".opt").val().split(",");
 
         if (fs == 'radio') {
             $.each(arr, function (i) {
-                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + arr[i] + '""class="' + cls + '"> <label>' + arr[i] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + arr[i] + '""class="' + cls + '"> <label>' + arr[i] + ' </label>');
                 if (arr[i] == value) {
                     $('input[value=' + arr[i] + ']').prop('checked', true);
                 }
@@ -112,7 +113,7 @@ $(document).ready(function () {
         else if (fs == 'textarea') {
             $.each(arr, function (j) {
                 $(fos).append('<input type="' + fs + '"name="' + name + '"value="' + arr[j] + '"class="' + cls + '"> <label>' +
-                    label + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                    label + ' </label>');
             });
 
         } else if (fs == 'select') {
@@ -125,7 +126,7 @@ $(document).ready(function () {
         }
         else if (fs == 'checkbox') {
             $.each(arr, function (l) {
-                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + arr[l] + '"class="' + cls + '"> <label>' + arr[l] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                $(fos).append('<input type="' + fs + '"name="' + name + '" value="' + arr[l] + '"class="' + cls + '"> <label>' + arr[l] + ' </label>');
                 if (arr[l] == value) {
                     $('input[value=' + arr[l] + ']').prop('checked', true);
                 }
@@ -133,7 +134,7 @@ $(document).ready(function () {
         }
 
         else {
-            $(fos).append('<label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '"><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+            $(fos).append('<label >' + label + '</label>  <input type="' + fs + '" name="' + name + '" placeholder="' + placeholder + '" value="' + value + '"class="' + cls + '">');
         }
 
         headval = headval - 1;
@@ -210,12 +211,12 @@ function loadDataFromStorage() {
 
             var formArr = subObj.formarr;
             $(formArr).each(function (j, formObj) {
-                var aa = '<p></p>';
+                var aa = '<p><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button></p>';
                 var fos = $(aa).appendTo("main div:nth-child(" + index + ") section:nth-of-type(" + i + ")");
 
                 if (formObj.type == 'radio') {
                     $.each(formObj.option, function (p) {
-                        $(fos).append('<input type="' + formObj.type + '"name="' + formObj.name + '" value="' + formObj.option[p] + '""class="' + formObj.classs + '"> <label>' + formObj.option[p] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                        $(fos).append('<input type="' + formObj.type + '"name="' + formObj.name + '" value="' + formObj.option[p] + '""class="' + formObj.classs + '"> <label>' + formObj.option[p] + ' </label>');
                         if (formObj.option[p] == formObj.value) {
                             $('input[value=' + formObj.option[p] + ']').prop('checked', true);
                         }
@@ -225,7 +226,7 @@ function loadDataFromStorage() {
                 else if (formObj.type == 'textarea') {
                     $.each(formObj.option, function (q) {
                         $(fos).append('<input type="' + formObj.type + '"name="' + formObj.name + '"value="' + formObj.option[q] + '"class="' + formObj.classs + '"> <label>' +
-                            formObj.label + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                            formObj.label + ' </label>');
                     });
 
                 } else if (formObj.type == 'select') {
@@ -237,7 +238,7 @@ function loadDataFromStorage() {
                 }
                 else if (formObj.type == 'checkbox') {
                     $.each(formObj.option, function (s) {
-                        $(fos).append('<input type="' + formObj.type + '"name="' + formObj.name + '" value="' + formObj.option[s] + '"class="' + formObj.classs + '"> <label>' + formObj.option[s] + ' </label><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                        $(fos).append('<input type="' + formObj.type + '"name="' + formObj.name + '" value="' + formObj.option[s] + '"class="' + formObj.classs + '"> <label>' + formObj.option[s] + ' </label>');
                         if (formObj.option[s] == formObj.value) {
                             $('input[value=' + formObj.option[s] + ']').prop('checked', true);
                         }
@@ -245,7 +246,7 @@ function loadDataFromStorage() {
                 }
 
                 else {
-                    $(fos).append('<label >' + formObj.label + '</label>  <input type="' + formObj.type + '" name="' + formObj.name + '" placeholder="' + formObj.placeholder + '" value="' + formObj.value + '"class="' + formObj.classs + '"><button type="button" class="btn-close" onclick="deleteForFrom(this)" aria-label="Close"></button>');
+                    $(fos).append('<label >' + formObj.label + '</label>  <input type="' + formObj.type + '" name="' + formObj.name + '" placeholder="' + formObj.placeholder + '" value="' + formObj.value + '"class="' + formObj.classs + '">');
                 }
             });
         });
@@ -259,13 +260,14 @@ function loadDataFromStorage() {
 
 function deleteFromStorage(el) {
 
-    window.localStorage.clear();
+
     el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
     prepareLocalStorageData();
 }
 
 
 function prepareLocalStorageData() {
+    window.localStorage.clear();
     headarr = [];
     $("main div h1").each(function (index) {
         var head1 = $(this).text();
@@ -283,10 +285,11 @@ function prepareLocalStorageData() {
             $("main div:nth-child(" + x + ") section p").each(function (j, obj) {
                 if ($(obj).children().size() > 0) {
                     var formObj = {};
+                    formObj.option = [];
+
                     $(obj).children().each(function (j, child) {
                         var c = $(child);
-
-
+                        console.log(c);
                         if (c.is('label')) {
                             formObj.label = c.text();
                         }
@@ -297,18 +300,21 @@ function prepareLocalStorageData() {
                             formObj.placeholder = c.prop('placeholder');
                             formObj.value = c.prop('value');
                             formObj.classs = c.prop('class');
-                            formObj.option = c.prop('option');
-                            // if (formObj.type == 'radio') {
-                            $(formObj.option).each(function (a) {
 
-                            })
-                            // }
+                            if (formObj.type == 'radio') {
+                                formObj.option.push(formObj.value);
+                            }
+                            else if (formObj.type = 'textarea') {
+                                formObj.option.push(formObj.value);
+                            }
+                            else if (formObj.type = 'checkbox') {
+                                formObj.option.push(formObj.value);
+                            }
                         }
-                        // if (c.is('select')) {
-                        //     formObj.select
-                        // }
+                        if (c.is('select')) {
+                            $(this).find('option');
 
-
+                        }
 
                     });
                     subArr.formarr.push(formObj);
@@ -322,30 +328,20 @@ function prepareLocalStorageData() {
     });
 }
 function deleteForFrom(elm) {
-    window.localStorage.clear();
+    // window.localStorage.clear();
     elm.parentNode.parentNode.removeChild(elm.parentNode);
 
     prepareLocalStorageData();
 
 }
-
-
 $(function () {
-    window.localStorage.clear();
     $("main div section").sortable({
         connectWith: "main div, main div section",
-        dropOnEmpty: false,
         change: function () {
             prepareLocalStorageData();
         }
     });
 
-
-})
-
-
-
-
-
+});
 
 
