@@ -47,15 +47,6 @@ $(document).ready(function () {
 
         $("main div:nth-child(" + selval + ")").append('<section><h2>' + inp2 + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');  //main div nthchild(heading selected are append after selected heading)
 
-        // $(function () {
-
-        //     $("main div section").sortable({
-        //         connectWith: "main div, main div section",
-        //         dropOnEmpty: true
-        //     });
-
-
-        // })
         selval = selval - 1;
 
         headarr[selval].sub_arr.push({ "subheading": inp2, 'formarr': [] });
@@ -175,6 +166,7 @@ $(document).ready(function () {
             $('.ins').prop('required', false);
         }
     });
+
 });
 
 // load data from local storage after refresh the page..............//
@@ -192,15 +184,6 @@ function loadDataFromStorage() {
         $(".selectheadingform").append(' <option value="none" selected disabled hidden>--select--</option>');
         $('.selectheadingform').append('<option value="' + index + '">' + headObj.heading + '</option>');
 
-        // $(function () {
-
-        //     $("main div section").sortable({
-        //         connectWith: "main div, main div section",
-        //         dropOnEmpty: true
-        //     });
-
-
-        // })
         var subArr = headObj.sub_arr;
         $(subArr).each(function (i, subObj) {
             $('main div:nth-child(' + index + ')').append('<section><h2>' + subObj.subheading + '<button type="button" class="btn-close" onclick="deleteFromStorage(this)" aria-label="Close"></button></h2></section>');
@@ -254,6 +237,7 @@ function loadDataFromStorage() {
 
     });
 
+
 };
 
 //delete data from local storage..........................//
@@ -267,29 +251,32 @@ function deleteFromStorage(el) {
 
 
 function prepareLocalStorageData() {
+    console.log('inside local function');
     window.localStorage.clear();
+    // debugger;
     headarr = [];
     $("main div h1").each(function (index) {
         var head1 = $(this).text();
         var headObj = { 'heading': head1, 'sub_arr': [] };
         headarr.push(headObj);
 
-        var x = index + 1;
-        $("main div:nth-child(" + x + ") section h2").each(function (i) {
+        index = index + 1;
+
+        $("main div:nth-child(" + index + ") section h2").each(function (i) {
             var inp2 = $(this).text();
             var subArr = { "subheading": inp2, 'formarr': [] };
             headObj.sub_arr.push(subArr);
-
-            var y = i + 1;
+            console.log('hvhgh', headObj.sub_arr);
+            i = i + 1;
             // console.log('getting form inputs');
-            $("main div:nth-child(" + x + ") section p").each(function (j, obj) {
+            $("main div:nth-child(" + index + ") section p").each(function (j, obj) {
                 if ($(obj).children().size() > 0) {
                     var formObj = {};
                     formObj.option = [];
 
                     $(obj).children().each(function (j, child) {
                         var c = $(child);
-                        console.log(c);
+
                         if (c.is('label')) {
                             formObj.label = c.text();
                         }
@@ -304,23 +291,31 @@ function prepareLocalStorageData() {
                             if (formObj.type == 'radio') {
                                 formObj.option.push(formObj.value);
                             }
-                            else if (formObj.type = 'textarea') {
+                            else if (formObj.type == 'textarea') {
                                 formObj.option.push(formObj.value);
                             }
-                            else if (formObj.type = 'checkbox') {
+                            else if (formObj.type == 'checkbox') {
                                 formObj.option.push(formObj.value);
                             }
-                        }
-                        if (c.is('select')) {
-                            $(this).find('option');
 
+                        }
+                        console.log('we are in form object', formObj)
+                        if (c.is('select')) {
+                            formObj.type = c.prop('type');
+                            formObj.value = c.prop('value');
+                            formObj.name = c.prop('name');
+                            formObj.classs = c.prop('class');
+                            ($(this).children('option')).each(function () {
+                                formObj.option.push(formObj.value);
+                            })
+
+
+                            // formObj.option.push(formObj.value);
                         }
 
                     });
                     subArr.formarr.push(formObj);
-
                 }
-
             });
         });
         var myJSON = JSON.stringify(headarr);
@@ -334,14 +329,22 @@ function deleteForFrom(elm) {
     prepareLocalStorageData();
 
 }
+
+
 $(function () {
-    $("main div section").sortable({
-        connectWith: "main div, main div section",
+    $("main section").sortable({
+        connectWith: "main section",
+        dropOnEmpty: false,
+        revert: true,
         change: function () {
-            prepareLocalStorageData();
+            prepareLocalStorageData()
         }
     });
 
 });
+
+// function prepareafter() {
+
+// }
 
 
